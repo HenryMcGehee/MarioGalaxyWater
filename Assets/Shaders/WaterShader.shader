@@ -102,6 +102,7 @@ Shader "Unlit/WaterShader"
         }
         Pass
         {
+            Blend One One
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -165,6 +166,8 @@ Shader "Unlit/WaterShader"
 
                 clip(col1.a - _Cutoff2);
                 clip(i.color - _EdgeWeight);
+
+                fixed4 final = i.color + col1;
 
                 return col1;
             }

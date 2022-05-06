@@ -24,6 +24,7 @@ Material:
         m_Scale: {x: 10, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _FresnelPower: 0.191
+    - _FresnelInfluence: 5
+    - _FresnelPower: 0.303
     m_Colors: []
   m_BuildTextureStacks: []
