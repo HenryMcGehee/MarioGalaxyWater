@@ -81,11 +81,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.889
-    - _Cutoff2: 0.912
+    - _Cutoff: 0.765
+    - _Cutoff2: 0.874
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _EdgeWeight: 0.0121
+    - _EdgeWeight: 0.0157
     - _GlossMapScale: 1
     - _Glossiness: 1
     - _GlossyReflections: 1
