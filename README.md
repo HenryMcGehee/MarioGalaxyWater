@@ -1,3 +1,3 @@
 # MarioGalaxyWater
 
-![Imgur](https://imgur.com/ierhThR)
+![Water Effect](https://imgur.com/ierhThR)
