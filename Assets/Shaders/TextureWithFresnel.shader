@@ -3,8 +3,8 @@ Shader "Unlit/TextureWithFresnel"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _FresnelPower ("Fresnel Intensity", Range(0, 0.3)) = 0.2
-        //_Cutoff2("Alpha Cutoff 2", Range(0,1)) = 0.5
+        _FresnelPower ("Fresnel Intensity", Range(0, 1)) = 0.5
+        _FresnelInfluence("Fresnel Influence", Range(0,8)) = 0.5
     }
     SubShader
     {
@@ -20,6 +20,7 @@ Shader "Unlit/TextureWithFresnel"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+
 
             struct appdata
             {
@@ -42,6 +43,7 @@ Shader "Unlit/TextureWithFresnel"
             float4 _MainTex_ST;
 
             float _FresnelPower;
+            float _FresnelInfluence;
 
             v2f vert (appdata v)
             {
@@ -49,7 +51,7 @@ Shader "Unlit/TextureWithFresnel"
                 o.viewPos = WorldSpaceViewDir(v.vertex);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.normal = v.normal;
+                o.normal = UnityObjectToWorldNormal(v.normal);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -59,7 +61,7 @@ Shader "Unlit/TextureWithFresnel"
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-                half rim = 1-dot(normalize(i.viewPos), i.normal);
+                half rim = pow(1- saturate(dot(normalize(i.viewPos), normalize(i.normal))), _FresnelInfluence);
                 rim *= _FresnelPower;
 
                 // apply fog
